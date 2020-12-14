@@ -22,12 +22,12 @@
                     <a href="/register">注册</a>
                 </div>
                 <div id="username">
-                    <a th:href="@{/account/{user}(user=${session.userToken})}" th:if="${session.userToken != null}">[[${session.username}]]</a>
+                    <a th:href="@{/account/{user}(user=${session.uid})}" th:if="${session.username != null}">[[${session.username}]]</a>
                 </div>
-                <div id="my_order" th:if="${session.userToken != null}">
-                    <a th:href="@{/orders/{user}(user=${session.userToken})}">我的订单</a>
+                <div id="my_order" th:if="${session.username != null}">
+                    <a th:href="@{/orders/{user}(user=${session.uid})}">我的订单</a>
                 </div>
-                <div id="logout" @click="logout" th:if="${session.userToken != null}">
+                <div id="logout" @click="logout" th:if="${session.username != null}">
                     <a href="javascript:;">退出</a>
                 </div>
 
@@ -37,7 +37,7 @@
 
     <div th:fragment="shopcar">
         <div id="shopcar">
-            <a th:href="@{/shopcar/{user}(user=${session.userToken})}" th:if="${session.userToken}!=null">
+            <a th:href="@{/shopcar/{user}(user=${session.uid})}" th:if="${session.userToken}!=null">
                 <img src="/img/shopcar.png">
             </a>
             <a href="javascript:;" th:if="${session.userToken}==null">
@@ -49,9 +49,6 @@
     <div th:fragment="footer">
         <div id="footer">
             <h2>The End</h2>
-            <div>Copyright © 2020 Apple Inc. All rights reserved</div>
-            <div>Author:&nbsp;&nbsp;陈十三、倪梓源</div>
-            <div>备案号：粤ICP备110277X号</div>
         </div>
     </div>
 
