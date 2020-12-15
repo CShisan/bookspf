@@ -160,9 +160,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void logout() {
-        UserDTO user=(UserDTO)httpSession.getAttribute("user");
+        Integer uid=(Integer)httpSession.getAttribute("uid");
         UserDTO temp=new UserDTO();
-        BeanUtils.copyProperties(user,temp);
+        temp.setUid(uid);
         temp.setAccesstoken("");
         userMapper.updateAccesstoken(temp);
         httpSession.removeAttribute(USERTOKEN);
