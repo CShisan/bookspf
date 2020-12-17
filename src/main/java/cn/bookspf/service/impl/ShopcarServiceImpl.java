@@ -4,6 +4,7 @@ import cn.bookspf.mapper.*;
 import cn.bookspf.model.Dao.Book;
 import cn.bookspf.model.Dao.Shopcar;
 import cn.bookspf.model.Dao.Stock;
+import cn.bookspf.model.Dao.User;
 import cn.bookspf.model.Dto.ShopcarDTO;
 import cn.bookspf.model.Dto.UserDTO;
 import cn.bookspf.model.RO.Response;
@@ -60,7 +61,7 @@ public class ShopcarServiceImpl implements ShopcarService {
         if(!loginStatus.isStatus()){
             return loginStatus;
         }
-        UserDTO user = (UserDTO) httpSession.getAttribute("user");
+        User user = (User) httpSession.getAttribute("user");
         Integer uid= user.getUid();
         ArrayList<Shopcar> shopcars= shopcarMapper.getShopcarOfUid(uid);
         if (shopcars.size()==0) {
@@ -93,7 +94,7 @@ public class ShopcarServiceImpl implements ShopcarService {
         if(!loginStatus.isStatus()){
             return loginStatus;
         }
-        UserDTO user = (UserDTO) httpSession.getAttribute("user");
+        User user = (User) httpSession.getAttribute("user");
         Integer uid= user.getUid();
         shopcarMapper.updateBooknumber(uid,request.getBid(),request.getBooknumber());
         return  new Response(true,"修改成功");
@@ -111,7 +112,7 @@ public class ShopcarServiceImpl implements ShopcarService {
         if(!loginStatus.isStatus()){
             return loginStatus;
         }
-        UserDTO user = (UserDTO) httpSession.getAttribute("user");
+        User user = (User) httpSession.getAttribute("user");
         Integer uid= user.getUid();
 
         ArrayList<Shopcar> shopcars = shopcarMapper.getShopcarOfUid(uid);
@@ -181,7 +182,7 @@ public class ShopcarServiceImpl implements ShopcarService {
         if(!loginStatus.isStatus()){
             return loginStatus;
         }
-        UserDTO user = (UserDTO) httpSession.getAttribute("user");
+        User user = (User) httpSession.getAttribute("user");
         Integer uid= user.getUid();
         shopcarMapper.deleteShopcarOfBid(uid,request.getBid());
         return new Response(true,"删除成功");

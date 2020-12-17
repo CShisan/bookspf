@@ -4,6 +4,7 @@ import cn.bookspf.mapper.BookMapper;
 import cn.bookspf.mapper.OrderMapper;
 import cn.bookspf.mapper.UserMapper;
 import cn.bookspf.model.Dao.Order;
+import cn.bookspf.model.Dao.User;
 import cn.bookspf.model.Dto.OrderDTO;
 import cn.bookspf.model.Dto.UserDTO;
 import cn.bookspf.model.RO.OrderResponse;
@@ -54,7 +55,7 @@ public class OrdersServiceImpl implements OrdersService {
             return loginStatus;
         }
         OrderResponse orderResponse=new OrderResponse();
-        UserDTO user = (UserDTO) httpSession.getAttribute("user");
+        User user = (User) httpSession.getAttribute("user");
         Integer uid= user.getUid();
 
         JSONObject Obj=JSONObject.parseObject(request);

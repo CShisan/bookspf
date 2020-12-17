@@ -312,7 +312,7 @@ public class MangerServiceImpl implements ManagerService {
         if(!loginStatus.isStatus()){
             return loginStatus;
         }
-        UserDTO user = (UserDTO)httpSession.getAttribute("user");
+        User user = (User)httpSession.getAttribute("user");
         Integer uid = user.getUid();
         request.setOperator(uid);
         request.setPurchasetime(request.getPurchasetime().replace("T"," "));

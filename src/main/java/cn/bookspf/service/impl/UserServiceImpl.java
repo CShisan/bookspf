@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
         if(!loginStatus.isStatus()){
             return loginStatus;
         }
-        UserDTO user = (UserDTO) httpSession.getAttribute("user");
+        User user = (User) httpSession.getAttribute("user");
         Integer uid= user.getUid();
         Double userBalance = userMapper.getBalance(uid);
         userBalance = request.getBalance()+userBalance;
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
         if(!loginStatus.isStatus()){
             return loginStatus;
         }
-        UserDTO user = (UserDTO) httpSession.getAttribute("user");
+        User user = (User) httpSession.getAttribute("user");
         Integer uid= user.getUid();
         String newPassword = DigestUtils.md5DigestAsHex(request.getPassword().getBytes());
         if(newPassword.equals(userMapper.getPasswordOfUid(uid))) {
@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
         if(!loginStatus.isStatus()){
             return loginStatus;
         }
-        UserDTO user = (UserDTO) httpSession.getAttribute("user");
+        User user = (User) httpSession.getAttribute("user");
         Integer uid= user.getUid();
         String phone = request.getPhone();
         String oldPhone = userMapper.getPhone(uid);
@@ -94,7 +94,7 @@ public class UserServiceImpl implements UserService {
         if(!loginStatus.isStatus()){
             return loginStatus;
         }
-        UserDTO user = (UserDTO) httpSession.getAttribute("user");
+        User user = (User) httpSession.getAttribute("user");
         Integer uid= user.getUid();
         String realname = request.getRealname();
         String oldRealname = userMapper.getRealname(uid);
@@ -113,7 +113,7 @@ public class UserServiceImpl implements UserService {
         if(!loginStatus.isStatus()){
             return loginStatus;
         }
-        UserDTO user = (UserDTO) httpSession.getAttribute("user");
+        User user = (User) httpSession.getAttribute("user");
         Integer uid= user.getUid();
         String address = request.getAddress();
         String oldAddress = userMapper.getAddress(uid);
@@ -151,7 +151,10 @@ public class UserServiceImpl implements UserService {
         UserDTO temp = new UserDTO();
         BeanUtils.copyProperties(user,temp);
         userMapper.updateAccesstoken(temp);
+        user.setAccesstoken("");
+        user.setPassword("");
         httpSession.setAttribute(USERTOKEN, userToken);
+        httpSession.setAttribute("user",user);
         httpSession.setAttribute("username", user.getUsername());
         httpSession.setAttribute("uid", user.getUid());
         httpSession.setMaxInactiveInterval(60*60);

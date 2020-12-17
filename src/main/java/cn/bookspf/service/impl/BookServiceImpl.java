@@ -3,6 +3,7 @@ package cn.bookspf.service.impl;
 import cn.bookspf.mapper.*;
 import cn.bookspf.model.Dao.Book;
 import cn.bookspf.model.Dao.Stock;
+import cn.bookspf.model.Dao.User;
 import cn.bookspf.model.Dto.BookDTO;
 import cn.bookspf.model.Dto.UserDTO;
 import cn.bookspf.model.RO.Response;
@@ -57,7 +58,7 @@ public class BookServiceImpl implements BookService {
         if(bookMapper.getBookNumber(bid)==0) {
             return new Response(false,"抱歉,该图书已售罄");
         }
-        UserDTO user=(UserDTO)httpSession.getAttribute("user");
+        User user=(User)httpSession.getAttribute("user");
         Integer uid = user.getUid();
         Book book=bookMapper.getBook(bid);
         Double balance=userMapper.getBalance(uid);
@@ -110,7 +111,7 @@ public class BookServiceImpl implements BookService {
         if(bookMapper.getBookNumber(bid)==0) {
             return new Response(false,"抱歉,该图书已售罄");
         }
-        UserDTO user=(UserDTO)httpSession.getAttribute("user");
+        User user=(User)httpSession.getAttribute("user");
         Integer uid = user.getUid();
         Long carid = shopcarMapper.getShopcaridOfUid(uid);
         if(carid==null) {
